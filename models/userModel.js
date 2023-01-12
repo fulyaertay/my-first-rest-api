@@ -5,6 +5,15 @@ function findAll(){
         resolve(users)
     })
 }
+function findByID(id){
+    return new Promise((resolve,reject)=>{
+        const user=users.find((k)=>k.id==id);
+        console.log(user);
+        resolve(user)
+    })
+
+}
 module.exports={
-    findAll
+    findAll,
+    findByID
 }

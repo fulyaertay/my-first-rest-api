@@ -11,5 +11,26 @@ async function getUsers(req,res){
     }
 }
 
+async function getUser(req,res,id){
+    try {
+        const getUserID=await userModel.findByID(id);
+    
+        if(!getUserID){
+            res.writeHead(404,{"Content-Type":"application/json"});
+            res.end(JSON.stringify({message:"not found!"}))
+
+        }else{
+            res.writeHead(200,{"Content-Type":"application/json"});
+            res.end(JSON.stringify(getUserID))
+
+
+        }
+  
+    } catch (error) {
+        console.log(error)
+        
+    }
+}
+
 module.exports={
-    getUsers}
+    getUsers,getUser}
