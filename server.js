@@ -1,6 +1,6 @@
 
 const http=require("http");
-const datas=require("./data/userData.json")
+const {getUsers}= require("./controller/userController")
 const server=http.createServer((req,res)=>{
     // // console.log(req.url);
     // res.statusCode=200;
@@ -8,8 +8,7 @@ const server=http.createServer((req,res)=>{
     // res.write("<h1>Hello NodeJS</h1>")
     // res.end();
     if(req.url==='/api/users' && req.method==='GET'){
-        res.writeHead(200,{"Content-Type":"application/json"});
-        res.end(JSON.stringify(datas))
+        getUsers(req,res)
 
     }else{
         res.writeHead(404,{"Content-Type":"application/json"});
