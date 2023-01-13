@@ -64,6 +64,24 @@ async function updateUser(req, res, id) {
     console.log(error);
   }
 }
+
+async function deleteUser(req, res, id) {
+    try {
+      const getUserID = await userModel.findByID(id);
+  
+      if (!getUserID) {
+        res.writeHead(404, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: "not found!" }));
+      } else {
+          await userModel.remove(id)
+          const updateUser=await userModel.update(id,userData)
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({message:"User ID=${id} deleted! "}));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 module.exports = {
   getUsers,
   getUser,

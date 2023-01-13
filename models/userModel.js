@@ -1,4 +1,4 @@
-const users=require("../data/userData.json");
+var users=require("../data/userData.json");
 const {v4:uuidv4}=require("uuid")
 const {writeDoc} =require("../utils")
 function findAll(){
@@ -35,9 +35,18 @@ function update(id,user){
  
 
 }
+function remove(id){
+    return new Promise((resolve,reject)=>{
+    users=users.filter((k)=>k.id!==id) 
+    writeDoc("./data/userData.json",users);
+    resolve()
+
+})
+}
 module.exports={
     findAll,
     findByID,
     create,
-    update
+    update,
+    remove
 }
