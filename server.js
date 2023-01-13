@@ -1,6 +1,6 @@
 
 const http=require("http");
-const {getUsers,getUser}= require("./controller/userController")
+const {getUsers,getUser, createUser}= require("./controller/userController")
 const server=http.createServer((req,res)=>{
     // // console.log(req.url);
     // res.statusCode=200;
@@ -16,6 +16,9 @@ const server=http.createServer((req,res)=>{
         const id=req.url.split('/')[3];
         getUser(req,res,id)
 
+        //POST METHOD
+    }else if(req.url==='/api/user' && req.method==="POST"){
+        createUser(req,res)
     }
     //If 404, return error message
     else{
@@ -27,4 +30,6 @@ const server=http.createServer((req,res)=>{
 const PORT=process.env.PORT || 5000;
 server.listen(PORT,()=>{
     console.log(`Server starts on ${PORT}`)
-})
+
+
+

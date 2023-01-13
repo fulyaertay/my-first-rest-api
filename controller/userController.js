@@ -31,6 +31,19 @@ async function getUser(req,res,id){
         
     }
 }
-
+async function createUser(req,res){
+    try {
+        const user={
+            name:"esra",
+            surname:"alp"
+        }
+        const newUser=await userModel.create(user)
+        res.writeHead(201,{"Content-Type":"application/json"});
+        return res.end(JSON.stringify(newUser))
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 module.exports={
-    getUsers,getUser}
+    getUsers,getUser,createUser}
