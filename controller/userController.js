@@ -1,5 +1,5 @@
 const userModel=require("../models/userModel")
-
+const {getPostData}=require("../utils")
 async function getUsers(req,res){
     try {
         const getUser=await userModel.findAll();
@@ -32,10 +32,12 @@ async function getUser(req,res,id){
     }
 }
 async function createUser(req,res){
+    const body=await getPostData(req);
+    const {name,surname}=JSON.parse(body)
     try {
         const user={
-            name:"esra",
-            surname:"alp"
+            name,
+            surname
         }
         const newUser=await userModel.create(user)
         res.writeHead(201,{"Content-Type":"application/json"});
