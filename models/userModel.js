@@ -22,8 +22,22 @@ function create(user){
     })
 
 }
+
+function update(id,user){
+    const index=users.findIndex((k)=>{
+        k.id===id
+    })
+    users[index]={id,...user}
+   
+
+        writeDoc("./data/userData.json",users);
+        resolve( users[index])
+ 
+
+}
 module.exports={
     findAll,
     findByID,
-    create
+    create,
+    update
 }

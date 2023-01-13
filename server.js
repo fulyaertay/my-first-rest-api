@@ -1,6 +1,6 @@
 
 const http=require("http");
-const {getUsers,getUser, createUser}= require("./controller/userController")
+const {getUsers,getUser, createUser,updateUser}= require("./controller/userController")
 const server=http.createServer((req,res)=>{
     // // console.log(req.url);
     // res.statusCode=200;
@@ -19,6 +19,11 @@ const server=http.createServer((req,res)=>{
         //POST METHOD
     }else if(req.url==='/api/user' && req.method==="POST"){
         createUser(req,res)
+
+        //PUT METHOD
+    }else if(req.url.match(/\api\/user\/([0-9]+)/)&& req.method==='PUT'){
+        const id=req.url.split('/')[3];
+        updateUser(req,res,id)
     }
     //If 404, return error message
     else{
